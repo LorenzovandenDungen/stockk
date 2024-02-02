@@ -108,6 +108,9 @@ class StockController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
+        $stock = Stock::find($id);
+        $stock->delete(); // Easy right?
+    
+        return redirect('/stocks');  // -> resources/views/stocks/index.blade.php
+    } 
 }
