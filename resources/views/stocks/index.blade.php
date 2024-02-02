@@ -31,6 +31,10 @@
                     <td>{{$stock->updated_at}}</td>
                     <td>
                         <a href="/stocks/edit/{{$stock->id}}" class="btn btn-primary">Edit</a>
+                        <form action="/stocks/destroy/{{$stock->id}}" method="post" style="display: inline;">
+                            @csrf
+                            <button onclick="return confirm('Are you sure?')" class="btn btn-danger" type="submit">Delete</button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach
