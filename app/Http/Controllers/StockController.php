@@ -37,7 +37,25 @@ class StockController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validation for required fields and numeric value
+        $request->validate([
+            'stock_name' => 'required',
+            'ticket' => 'required',
+            'value' => 'required|max:10|regex:/^-?[0-9]+(?:\.[0-9]{1,2})?$/',
+        ]);
+
+        // Create a new Stock model instance with the validated data
+        $stock = new Stock([
+            'stock_name' => $request->get('stock_name'),
+            'ticket' => $request->get('ticket'),
+            'value' => $request->get('value'),
+        ]);
+
+        // Save the new stock record to the database
+        $stock->save();
+
+        // Redirect back to the stocks index page with a success message
+        return redirect('/stocks')->with('success', 'Stock saved.');
     }
 
     /**
